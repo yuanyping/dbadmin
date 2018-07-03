@@ -1,0 +1,52 @@
+{% extends "menu.html" %}
+{% block content %}
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+
+
+
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>用户操作日志</h2>
+
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+                    <table class="sui-table table-bordered">
+  <thead>
+    <tr>
+        <th>id</th>
+        <th>用户名</th>
+        <th>日志内容</th>
+        <th>记录日期</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for i in info %}
+    <tr>
+
+        <td>{{ i.id}}</td>
+        <td>{{ i.log_user }}</td>
+        <td>{{ i.log_message }}</td>
+        <td>{{ i.log_time }}</td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+{% endblock %}

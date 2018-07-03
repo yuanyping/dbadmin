@@ -1,0 +1,133 @@
+{% extends "menu.html" %}
+{% block content %}
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+
+
+
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>数据库功能</h2>
+
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+                    <style>
+                      /*自己调整宽度*/
+                      .tab-wraped > li ul {
+                        width: 140px;
+                      }
+                      .tab-wraped > li ul label {
+                        width: 50px!important;
+                      }
+                    </style>
+                    <ul class="sui-nav nav-tabs tab-wraped">
+                      <li class="active">
+                          <a href="#index" data-toggle="tab">
+                          <h3>查询联盟密码</h3></a></li>
+                      <li><a href="#profile" data-toggle="tab">
+                          <h3>导出指定区数据库</h3></a></li>
+                    </ul>
+                    <div class="tab-content tab-wraped">
+                      <div id="index" class="tab-pane active">
+                          <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post">
+                        {% csrf_token %}
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">功能<span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="fun_num" value="1" readonly>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">区服<span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="zone_num">
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"> 联盟名称<span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="alliance_name">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                  <button class="btn btn-primary" type="button">Cancel</button>
+                                  <button class="btn btn-primary" type="reset">Reset</button>
+                                  <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                              </div>
+                          </form>
+                          <table class="sui-table table-bordered-simple">
+                          <thead>
+                            <tr>
+                              <th>联盟名字</th>
+                                <th>等级</th>
+                              <th>经验</th>
+                              <th>联盟密码</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          {% for p in result1 %}
+                            <tr>
+                              <td>{{ p.name }}</td>
+                              <td>{{ p.level }}</td>
+                              <td>{{ p.exp }}</td>
+                              <td>{{ p.password }}</td>
+                            </tr>
+                          {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                      <div id="profile" class="tab-pane">
+                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post">
+                        {% csrf_token %}
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">功能<span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="fun_num" value="2" readonly>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">区服<span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="zone_num">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                  <button class="btn btn-primary" type="button">Cancel</button>
+                                  <button class="btn btn-primary" type="reset">Reset</button>
+                                  <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                              </div>
+                          </form>
+                          <p><a href="javascript:void(0);" class="sui-btn"><i class="sui-icon icon-pencil"></i>文件下载:</a><span style="color: red;font-size: 20px"><a href="{{ result2 }}">{{ result2 }}</a> </span></p>
+                      </div>
+
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+{% endblock %}

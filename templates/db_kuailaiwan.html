@@ -1,0 +1,299 @@
+{% extends "menu.html" %}
+{% block content %}
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+
+
+
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>数据库功能</h2>
+
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+                    <style>
+                      /*自己调整宽度*/
+                      .tab-wraped > li ul {
+                        width: 140px;
+                      }
+                      .tab-wraped > li ul label {
+                        width: 50px!important;
+                      }
+                    </style>
+                    <ul class="sui-nav nav-tabs tab-wraped">
+                      <li class="active">
+                          <a href="#index" data-toggle="tab">
+                          <h3>等级分布</h3></a></li>
+                      <li><a href="#index2" data-toggle="tab">
+                          <h3>区服活跃</h3></a></li>
+                        <li><a href="#index3" data-toggle="tab">
+                          <h3>玩家充值记录</h3></a></li>
+                        <li><a href="#index4" data-toggle="tab">
+                          <h3>导出指定玩家数据</h3></a></li>
+{#                        <li><a href="#index5" data-toggle="tab">#}
+{#                          <h3>玩家Uin查询</h3></a></li>#}
+{#                        <li><a href="#index6" data-toggle="tab">#}
+{#                          <h3>gm道具领取情况</h3></a></li>#}
+                    </ul>
+                    <div class="tab-content tab-wraped">
+                        <div id="index" class="tab-pane active">
+                          <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post">
+                        {% csrf_token %}
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">功能<span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="fun_num" value="1" readonly>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">区服<span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="zone_num">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                  <button class="btn btn-primary" type="button">Cancel</button>
+                                  <button class="btn btn-primary" type="reset">Reset</button>
+                                  <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                              </div>
+                          </form>
+                          <table class="sui-table table-bordered-simple">
+                          <thead>
+                            <tr>
+                                <th>等级</th>
+                                <th>数量</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          {% for p in result1 %}
+                            <tr>
+                              <td>{{ p.Level }}</td>
+                              <td>{{ p.level_num }}</td>
+                            </tr>
+                          {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                        <div id="index2" class="tab-pane">
+                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post">
+                        {% csrf_token %}
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">功能<span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="fun_num" value="2" readonly>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">区服<span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="zone_num">
+                                </div>
+                              </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">指定时间活跃<span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="date" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="player_time">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                  <button class="btn btn-primary" type="button">Cancel</button>
+                                  <button class="btn btn-primary" type="reset">Reset</button>
+                                  <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                              </div>
+                          </form>
+                          <p><a href="javascript:void(0);" class="sui-btn"><i class="sui-icon icon-pencil"></i>活跃量:<span style="color: red;font-size: 20px">{{ result2 }}</span></a></p>
+                      </div>
+                        <div id="index3" class="tab-pane">
+                          <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post">
+                        {% csrf_token %}
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">功能<span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="fun_num" value="3" readonly>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">玩家所在区<span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="zone_num">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">玩家Uin<span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="user_uin">
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                  <button class="btn btn-primary" type="button">Cancel</button>
+                                  <button class="btn btn-primary" type="reset">Reset</button>
+                                  <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                              </div>
+                          </form>
+                          <table class="sui-table table-bordered-simple">
+                          <thead>
+                            <tr>
+                                <th>Uin</th>
+                                <th>PingTaiSeq</th>
+                                <th>RMB</th>
+                                <th>Type</th>
+                                <th>IsGet</th>
+                                <th>LogTime</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          {% for p in result3 %}
+                            <tr>
+                                <td>{{ p.Uin }}</td>
+                                <td>{{ p.PingTaiSeq }}</td>
+                                <td>{{ p.RMB}}</td>
+                                <td>{{ p.Type}}</td>
+                                <td>{{ p.IsGet}}</td>
+                                <td>{{ p.LogTime}}</td>
+                            </tr>
+                          {% endfor %}
+                          </tbody>
+                        </table>
+                      </div>
+                        <div id="index4" class="tab-pane">
+                          <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post">
+                        {% csrf_token %}
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">功能<span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="fun_num" value="4" readonly>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">玩家所在区<span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="zone_num">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">玩家Uin<span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="user_uin">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                  <button class="btn btn-primary" type="button">Cancel</button>
+                                  <button class="btn btn-primary" type="reset">Reset</button>
+                                  <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                              </div>
+                          </form>
+                            <p><a href="javascript:void(0);" class="sui-btn"><i class="sui-icon icon-pencil"></i>文件下载:</a><a href="{{ result4 }}"><span style="color: red;font-size: 20px">{{ result4 }}</span></a> </p>
+
+                      </div>
+{#                        <div id="index5" class="tab-pane">#}
+{#                          <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post">#}
+{#                        {% csrf_token %}#}
+{#                              <div class="form-group">#}
+{#                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">功能<span class="required">*</span>#}
+{#                                </label>#}
+{#                                <div class="col-md-6 col-sm-6 col-xs-12">#}
+{#                                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="fun_num" value="5" readonly>#}
+{#                                </div>#}
+{#                              </div>#}
+{#                              <div class="form-group">#}
+{#                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">玩家所在区<span class="required">*</span>#}
+{#                                </label>#}
+{#                                <div class="col-md-6 col-sm-6 col-xs-12">#}
+{#                                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="zone_num">#}
+{#                                </div>#}
+{#                              </div>#}
+{#                              <div class="form-group">#}
+{#                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">玩家名<span class="required">*</span>#}
+{#                                </label>#}
+{#                                <div class="col-md-6 col-sm-6 col-xs-12">#}
+{#                                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="player_name">#}
+{#                                </div>#}
+{#                              </div>#}
+{##}
+{#                              <div class="form-group">#}
+{#                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">#}
+{#                                  <button class="btn btn-primary" type="button">Cancel</button>#}
+{#                                  <button class="btn btn-primary" type="reset">Reset</button>#}
+{#                                  <button type="submit" class="btn btn-success">Submit</button>#}
+{#                                </div>#}
+{#                              </div>#}
+{#                          </form>#}
+{#                            <p><a href="javascript:void(0);" class="sui-btn"><i class="sui-icon icon-pencil"></i>玩家Uin:<span style="color: red;font-size: 20px">{{ result5 }}</span></a><span style="color: red;font-size: 20px">{{ result4 }}</span></p>#}
+{##}
+{#                      </div>#}
+{#                        <div id="index6" class="tab-pane">#}
+{#                          <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post">#}
+{#                        {% csrf_token %}#}
+{#                              <div class="form-group">#}
+{#                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">功能<span class="required">*</span>#}
+{#                                </label>#}
+{#                                <div class="col-md-6 col-sm-6 col-xs-12">#}
+{#                                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="fun_num" value="6" readonly>#}
+{#                                </div>#}
+{#                              </div>#}
+{#                              <div class="form-group">#}
+{#                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">玩家所在区<span class="required">*</span>#}
+{#                                </label>#}
+{#                                <div class="col-md-6 col-sm-6 col-xs-12">#}
+{#                                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="zone_num">#}
+{#                                </div>#}
+{#                              </div>#}
+{#                              <div class="form-group">#}
+{#                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">玩家Uin<span class="required">*</span>#}
+{#                                </label>#}
+{#                                <div class="col-md-6 col-sm-6 col-xs-12">#}
+{#                                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" name="user_uin">#}
+{#                                </div>#}
+{#                              </div>#}
+{#                              <div class="form-group">#}
+{#                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">#}
+{#                                  <button class="btn btn-primary" type="button">Cancel</button>#}
+{#                                  <button class="btn btn-primary" type="reset">Reset</button>#}
+{#                                  <button type="submit" class="btn btn-success">Submit</button>#}
+{#                                </div>#}
+{#                              </div>#}
+{#                          </form>#}
+{#                            <p><a href="javascript:void(0);" class="sui-btn"><i class="sui-icon icon-pencil"></i>文件下载:</a><span style="color: red;font-size: 20px">{{ result4 }}</span></p>#}
+{##}
+{#                      </div>#}
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+{% endblock %}

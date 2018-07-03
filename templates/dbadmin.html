@@ -1,0 +1,63 @@
+{% extends "menu.html" %}
+{% block content %}
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+
+
+
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>数据库列表</h2>
+
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+                                        <table class="sui-table table-bordered">
+  <thead>
+    <tr>
+        <th>id</th>
+        <th>项目名称</th>
+        <th>数据库地址</th>
+        <th>数据库用户</th>
+        <th>数据库前缀</th>
+        <th>数据库版本</th>
+        <th>管理</th>
+    </tr>
+  </thead>
+  <tbody>
+  <style type="text/css">
+     tr:hover{
+         background-color: #FFFFE0;
+     }
+  </style>
+  {% for i in db_list %}
+    <tr>
+
+        <td>{{ i.id}}</td>
+        <td>{{ i.db_name }}</td>
+        <td>{{ i.db_ip }}</td>
+        <td>{{ i.db_user }}</td>
+        <td>{{ i.db_prefix }}</td>
+        <td>{{ i.db_v }}</td>
+        <td><a href="/db/dbdel/?id={{ i.id }}">删除</a> | <a href="/db/dbupdate/?id={{ i.id }}">更新</a> | <a href="/db/dbfun/?id={{ i.id }}">功能</a></td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+{% endblock %}
